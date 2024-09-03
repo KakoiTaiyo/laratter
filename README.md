@@ -1,7 +1,5 @@
 <!-- readme.md -->
 
-hello!world!
-
 # test
 
 ## chapter01
