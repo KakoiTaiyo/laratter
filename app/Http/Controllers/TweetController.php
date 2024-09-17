@@ -13,7 +13,7 @@ class TweetController extends Controller
     public function index()
     {
         //
-        $tweets = Tweet::with('user')->latest()->get();
+        $tweets = Tweet::with(['user', 'liked'])->latest()->get();
         return view('tweets.index', compact('tweets'));
     }
 
@@ -46,7 +46,7 @@ class TweetController extends Controller
      */
     public function show(Tweet $tweet)
     {
-        //
+        $tweet->load('comments');
         return view('tweets.show', compact('tweet'));
     }
 

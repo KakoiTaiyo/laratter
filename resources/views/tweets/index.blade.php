@@ -29,6 +29,8 @@
               </form>
               @endif
             </div>
+            <!--コメントの数を表示-->
+            <p class="text-gray-600 dark:text-gray-400 text-sm">コメント: {{$tweet->comments->count()}}</p>
           </div>
           @endforeach
         </div>
