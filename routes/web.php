@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // ユーザー検索
+    Route::get('/profile/search', [ProfileController::class, 'search'])->name('profile.search');
     // ユーザーページ
     Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/tweets/search', [TweetController::class, 'search'])->name('tweets.search');
