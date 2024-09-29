@@ -30,22 +30,22 @@
             {{ $user->appends(request()->input())->links() }}
           </div>
 
-          @foreach ($user as $oneUser)
+          @foreach ($user as $a_user)
           <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-            <p class="text-gray-800 dark:text-gray-300">{{ $oneUser->name }}</p>
-            <a href="{{ route('profile.show', $oneUser) }}" class="text-blue-500 hover:text-blue-700">詳細を見る</a>
+            <p class="text-gray-800 dark:text-gray-300">{{ $a_user->name }}</p>
+            <a href="{{ route('profile.show', $a_user) }}" class="text-blue-500 hover:text-blue-700">詳細を見る</a>
 
             <!-- フォローとフォロー解除 -->
-            @if ($oneUser->id !== auth()->id())
+            @if ($a_user->id !== auth()->id())
             <div class="text-gray-900 dark:text-gray-100">
-                @if ($oneUser->followers->contains(auth()->id()))
-                <form action="{{ route('follow.destroy', $oneUser) }}" method="POST">
+                @if ($a_user->followers->contains(auth()->id()))
+                <form action="{{ route('follow.destroy', $a_user) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-red-500 hover:text-red-700">unFollow</button>
                 </form>
                 @else
-                <form action="{{ route('follow.store', $oneUser) }}" method="POST">
+                <form action="{{ route('follow.store', $a_user) }}" method="POST">
                 @csrf
                 <button type="submit" class="text-blue-500 hover:text-blue-700">follow</button>
                 </form>
@@ -53,8 +53,8 @@
             </div>
             @endif
             <!-- 🔽 フォローフォロワー数 -->
-            <p>following: {{$oneUser->follows->count()}}</p>
-            <p>followers: {{$oneUser->followers->count()}}</p>
+            <p>following: {{$a_user->follows->count()}}</p>
+            <p>followers: {{$a_user->followers->count()}}</p>
           </div>
           @endforeach
 
