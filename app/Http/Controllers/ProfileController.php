@@ -60,6 +60,30 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    /**
+     * Search for tweets containing the keyword.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $query = User::query();
+
+        // キーワードが指定されている場合のみ検索を実行
+        if ($request->filled('keyword')) {
+            $keyword = $request->keyword;
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+
+        // ページネーションを追加（1ページに10件表示）
+        $user = $query
+            ->latest()
+            ->paginate(10);
+
+        return view('profile.search', compact('user'));
+    }
+
     public function show(User $user)
     {
         if (auth()->user()->is($user)) {
